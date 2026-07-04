@@ -10,10 +10,10 @@ rwc = $(foreach d, $(wildcard $1*), $(call rwc,$d/,$2) $(filter $(subst *,%,$2),
 HCH_PATH := $(abspath ../..)
 HCH_LIBS := $(HCH_PATH)/meta/android/app/src/libs
 
-SDL_PATH := $(abspath )src/main/jni/SDL2/include/
+SDL_PATH := $(abspath ../SDL2)
 
 LOCAL_C_INCLUDES := \
-    $(SDL_PATH) \
+    $(SDL_PATH)/include/ \
     \
     $(HCH_PATH)/source/ \
     $(HCH_PATH)/include/ \
@@ -29,10 +29,12 @@ LOCAL_C_INCLUDES := \
 LOCAL_SRC_FILES := \
     $(call rwc, $(HCH_PATH)/source/, *.cpp) \
     $(call rwc, $(HCH_PATH)/source/, *.c) \
+    $(call rwc, $(SDL_PATH)/src/, *.c) \
     \
     $(call rwc, $(HCH_LIBS)/libogg/, *.c) \
     $(call rwc, $(HCH_LIBS)/libpng16/, *.c) \
     $(call rwc, $(HCH_LIBS)/libvorbis/, *.c) \
+    $(call rwc, $(HCH_LIBS)/jpeg/, *.c) \
     \
     $(HCH_LIBS)/freetype/autofit/autofit.c \
     $(HCH_LIBS)/freetype/base/ftbase.c \
@@ -73,9 +75,6 @@ LOCAL_SRC_FILES := \
     $(HCH_LIBS)/freetype/type42/type42.c \
     $(HCH_LIBS)/freetype/winfonts/winfnt.c \
     $(HCH_LIBS)/freetype/ftdebug.c
-
-LOCAL_SHARED_LIBRARIES := SDL2
-LOCAL_STATIC_LIBRARIES += libjpeg
 
 LOCAL_LDLIBS := -lGLESv2 -lz -llog
 
