@@ -7,7 +7,7 @@ APP_OPTIM := debug
 
 APP_CFLAGS += -std=c11 -DNOCRYPT -DONOUNCRYPT -GL_GLEXT_PROTOTYPES -O3 -DNDEBUG -funsafe-math-optimizations -DFT2_BUILD_LIBRARY -DUNICODE -D_UNICODE \
     -DNO_CURL -DNO_LIBAV
-APP_CPPFLAGS += -std=c++11 -GL_GLEXT_PROTOTYPES -DANDROID -DTARGET_NAME=\"HatchGameEngine\" -O3 -DNDEBUG -funsafe-math-optimizations
+APP_CPPFLAGS += -std=c++17 -GL_GLEXT_PROTOTYPES -DANDROID -DTARGET_NAME=\"HatchGameEngine\" -O3 -DNDEBUG -funsafe-math-optimizations
 
 APP_ABI := armeabi armeabi-v7a x86
 
