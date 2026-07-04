@@ -13,7 +13,7 @@ HCH_LIBS := $(HCH_PATH)/meta/android/app/src/libs
 SDL_PATH := $(abspath ../SDL2)
 
 LOCAL_C_INCLUDES := \
-    $(SDL_PATH)/include/ \
+    $(SDL_PATH)/ \
     \
     $(HCH_PATH)/source/ \
     $(HCH_PATH)/include/ \
