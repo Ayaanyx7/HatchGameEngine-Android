@@ -19,11 +19,9 @@ LOCAL_C_INCLUDES := \
     $(HCH_PATH)/include/ \
     \
     $(HCH_LIBS)/include/ \
-    $(HCH_LIBS)/include/jpeg/ \
     $(HCH_LIBS)/libogg/ \
     $(HCH_LIBS)/libpng16/ \
-    $(HCH_LIBS)/libvorbis/ \
-    $(HCH_LIBS)/freetype/
+    $(HCH_LIBS)/libvorbis/
 
 # Add your application source files here...
 LOCAL_SRC_FILES := \
@@ -33,48 +31,7 @@ LOCAL_SRC_FILES := \
     \
     $(call rwc, $(HCH_LIBS)/libogg/, *.c) \
     $(call rwc, $(HCH_LIBS)/libpng16/, *.c) \
-    $(call rwc, $(HCH_LIBS)/libvorbis/, *.c) \
-    $(call rwc, $(HCH_LIBS)/jpeg/, *.c) \
-    \
-    $(HCH_LIBS)/freetype/autofit/autofit.c \
-    $(HCH_LIBS)/freetype/base/ftbase.c \
-    $(HCH_LIBS)/freetype/base/ftbbox.c \
-    $(HCH_LIBS)/freetype/base/ftbdf.c \
-    $(HCH_LIBS)/freetype/base/ftbitmap.c \
-    $(HCH_LIBS)/freetype/base/ftcid.c \
-    $(HCH_LIBS)/freetype/base/ftfstype.c \
-    $(HCH_LIBS)/freetype/base/ftgasp.c \
-    $(HCH_LIBS)/freetype/base/ftglyph.c \
-    $(HCH_LIBS)/freetype/base/ftgxval.c \
-    $(HCH_LIBS)/freetype/base/ftinit.c \
-    $(HCH_LIBS)/freetype/base/ftmm.c \
-    $(HCH_LIBS)/freetype/base/ftotval.c \
-    $(HCH_LIBS)/freetype/base/ftpatent.c \
-    $(HCH_LIBS)/freetype/base/ftpfr.c \
-    $(HCH_LIBS)/freetype/base/ftstroke.c \
-    $(HCH_LIBS)/freetype/base/ftsynth.c \
-    $(HCH_LIBS)/freetype/base/ftsystem.c \
-    $(HCH_LIBS)/freetype/base/fttype1.c \
-    $(HCH_LIBS)/freetype/base/ftwinfnt.c \
-    $(HCH_LIBS)/freetype/bdf/bdf.c \
-    $(HCH_LIBS)/freetype/cache/ftcache.c \
-    $(HCH_LIBS)/freetype/cff/cff.c \
-    $(HCH_LIBS)/freetype/cid/type1cid.c \
-    $(HCH_LIBS)/freetype/gzip/ftgzip.c \
-    $(HCH_LIBS)/freetype/lzw/ftlzw.c \
-    $(HCH_LIBS)/freetype/pcf/pcf.c \
-    $(HCH_LIBS)/freetype/pfr/pfr.c \
-    $(HCH_LIBS)/freetype/psaux/psaux.c \
-    $(HCH_LIBS)/freetype/pshinter/pshinter.c \
-    $(HCH_LIBS)/freetype/psnames/psmodule.c \
-    $(HCH_LIBS)/freetype/raster/raster.c \
-    $(HCH_LIBS)/freetype/sfnt/sfnt.c \
-    $(HCH_LIBS)/freetype/smooth/smooth.c \
-    $(HCH_LIBS)/freetype/truetype/truetype.c \
-    $(HCH_LIBS)/freetype/type1/type1.c \
-    $(HCH_LIBS)/freetype/type42/type42.c \
-    $(HCH_LIBS)/freetype/winfonts/winfnt.c \
-    $(HCH_LIBS)/freetype/ftdebug.c
+    $(call rwc, $(HCH_LIBS)/libvorbis/, *.c)
 
 LOCAL_LDLIBS := -lGLESv2 -lz -llog
 
