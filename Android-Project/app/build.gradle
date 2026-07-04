@@ -1,13 +1,15 @@
 apply plugin: 'com.android.application'
 android {
     signingConfigs {
-        config {
+    release {
+        if (file("cert.jks").exists()) {
             keyAlias 'key0'
             keyPassword 'justin'
-            storeFile file('C:/AndroidPROJ/cert.jks')
+            storeFile file('cert.jks')
             storePassword 'justin'
         }
     }
+}
     compileSdkVersion 26
     buildToolsVersion "27.0.3"
     defaultConfig {
