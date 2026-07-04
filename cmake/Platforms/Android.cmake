@@ -1,6 +1,6 @@
 add_library(${PROJECT_NAME} SHARED ${HATCH_SOURCES})
 
-target_compile_definitions(${PROJECT_NAME} -DANDROID)
+target_compile_definitions(${PROJECT_NAME} PRIVATE -DANDROID)
 
 include(cmake/Dependencies/FetchSDL2.cmake)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
