@@ -79,7 +79,16 @@ option(USING_OPENGL "Use OpenGL" ON)
 set(HATCH_SOURCES ${C_SOURCES} ${CPP_SOURCES} ${LIBRARY_SOURCES})
 
 # Find platform cmake file
-find_file(PLATFORM_FILE NAMES "${CMAKE_SYSTEM_NAME}.cmake" PATHS "${CMAKE_SOURCE_DIR}/cmake/Platforms" NO_DEFAULT_PATH)
+#
+# NOTE: NO_CMAKE_FIND_ROOT_PATH is required here for cross-compiling targets
+# (e.g. Android). The NDK toolchain file sets CMAKE_FIND_ROOT_PATH_MODE_INCLUDE
+# to ONLY, which silently restricts find_file() to the sysroot and ignores our
+# explicit PATHS argument unless we opt back out of that restriction for this
+# specific call. NO_DEFAULT_PATH alone does NOT do this - it only disables
+# CMake's own implicit search locations, not the toolchain's root-path mode.
+# This has no effect on non-cross-compiling platforms (Linux/Windows/macOS),
+# since CMAKE_FIND_ROOT_PATH is only set during cross-compilation.
+find_file(PLATFORM_FILE NAMES "${CMAKE_SYSTEM_NAME}.cmake" PATHS "${CMAKE_SOURCE_DIR}/cmake/Platforms" NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
 if(NOT PLATFORM_FILE)
   message(FATAL_ERROR "Could not find cmake file for target: '${CMAKE_SYSTEM_NAME}'")
 endif()
@@ -138,7 +147,11 @@ if(NOT CONSOLE_BASE_PATH STREQUAL "")
   target_compile_definitions(${PROJECT_NAME} PRIVATE -DCONSOLE_BASE_PATH="${CONSOLE_BASE_PATH}")
 endif()
 
-find_file(REPO_DIR NAMES .git PATHS ${CMAKE_SOURCE_DIR} NO_DEFAULT_PATH)
+# NOTE: same NO_CMAKE_FIND_ROOT_PATH fix applied here for consistency. This one
+# is lower-stakes (it just skips embedding the git commit hash if not found),
+# but it was silently broken under cross-compilation for the same reason as
+# PLATFORM_FILE above.
+find_file(REPO_DIR NAMES .git PATHS ${CMAKE_SOURCE_DIR} NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
 
 if (REPO_DIR)
   execute_process(
