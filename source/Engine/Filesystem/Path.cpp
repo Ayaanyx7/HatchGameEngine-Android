@@ -252,10 +252,16 @@ std::string Path::GetBasePath() {
 #elif defined(ANDROID)
 	// SDL_GetBasePath() returns NULL on Android (there's no meaningful
 	// "executable directory" concept when running from inside an APK),
-	// so we use SDL's Android-specific internal storage path instead.
-	// This is a real, writable, app-private folder on the device's
-	// internal storage.
-	const char* androidPath = SDL_AndroidGetInternalStoragePath();
+	// so we use SDL's Android-specific storage path instead.
+	//
+	// We use EXTERNAL storage here rather than internal storage:
+	// internal storage (SDL_AndroidGetInternalStoragePath, ->
+	// /data/data/<package>/files/) is private to the app and only
+	// browsable with true root access. External storage (->
+	// /storage/emulated/0/Android/data/<package>/files/) is visible
+	// to normal file managers once storage permission is granted,
+	// which matters for manually placing the data file on-device.
+	const char* androidPath = SDL_AndroidGetExternalStoragePath();
 	if (androidPath == nullptr) {
 		return "";
 	}
