@@ -16,7 +16,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                arguments "-DANDROID_STL=c++_shared"
+                arguments "-DANDROID_STL=c++_shared", "-DEXECUTABLE_NAME=HatchGameEngine"
                 abiFilters "arm64-v8a", "armeabi-v7a"
             }
         }
