@@ -197,7 +197,6 @@ void Application::Init(int argc, char* args[]) {
 #endif
 
 #ifdef ANDROID
-	SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1");
 #endif
 
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK |
