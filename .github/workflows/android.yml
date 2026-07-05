@@ -26,16 +26,6 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
           sdkmanager "ndk;27.0.12077973" "cmake;3.22.1"
-
-      - name: Download and extract game data
-        run: |
-          curl -L -o galactic.zip "https://cdn.tohoku.ac/sonicgalactic-demo2-patch1-win.zip"
-          unzip -o galactic.zip -d galactic_extracted
-          mkdir -p Android-Project/app/src/main/assets
-          find galactic_extracted -iname "data.hatch"
-          find galactic_extracted -iname "data.hatch" -exec cp {} Android-Project/app/src/main/assets/Data.hatch \;
-          ls -la Android-Project/app/src/main/assets/
-
       - name: Make gradlew executable
         run: chmod +x ./Android-Project/gradlew
 
