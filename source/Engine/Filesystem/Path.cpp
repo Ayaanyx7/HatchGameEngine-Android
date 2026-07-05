@@ -249,6 +249,23 @@ std::string Path::GetConsolePrefPath() {
 std::string Path::GetBasePath() {
 #ifdef CONSOLE_FILESYSTEM
 	return GetConsoleBasePath();
+#elif defined(ANDROID)
+	// SDL_GetBasePath() returns NULL on Android (there's no meaningful
+	// "executable directory" concept when running from inside an APK),
+	// so we use SDL's Android-specific internal storage path instead.
+	// This is a real, writable, app-private folder on the device's
+	// internal storage.
+	const char* androidPath = SDL_AndroidGetInternalStoragePath();
+	if (androidPath == nullptr) {
+		return "";
+	}
+
+	std::string path = std::string(androidPath);
+	if (path.back() != '/') {
+		path += "/";
+	}
+
+	return path;
 #else
 	char* basePath = SDL_GetBasePath();
 	if (basePath == nullptr) {
